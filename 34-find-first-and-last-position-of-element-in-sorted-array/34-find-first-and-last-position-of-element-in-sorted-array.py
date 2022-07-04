@@ -6,8 +6,7 @@ class Solution:
         
         while begin <= end:
             mid = (begin + end)//2
-            print(mid)
-            print(nums[mid])
+        
             if nums[mid] == target:
                 while mid >= begin and nums[mid] == target:
                     mid = mid - 1
