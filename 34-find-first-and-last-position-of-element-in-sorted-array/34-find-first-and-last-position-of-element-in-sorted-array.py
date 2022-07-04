@@ -1,24 +1,23 @@
 class Solution:
     def searchRange(self, nums: List[int], target: int) -> List[int]:
-        begin = 0
-        end = len(nums) - 1
-        result = [-1, -1]
+        first = self.binSearch(nums, target, True)
+        last = self.binSearch(nums, target, False)
         
-        while begin <= end:
-            mid = (begin + end)//2
-        
-            if nums[mid] == target:
-                while mid >= begin and nums[mid] == target:
-                    mid = mid - 1
-                result[0] = mid + 1
-                mid = mid + 1
-                while mid <= end and nums[mid] == target:
-                    mid = mid + 1
-                result[1] = mid -1
-                break 
-            elif nums[mid] > target:
-                end = end - 1
+        return [first, last]
+    
+    def binSearch(self, nums, target, leftBias):
+        left, right = 0, len(nums) - 1
+        i = -1
+        while left <= right: 
+            mid = (left + right)//2
+            if nums[mid] > target:
+                right = mid - 1
+            elif nums[mid] < target:
+                left = mid + 1
             else:
-                begin = begin + 1
-
-        return result
+                i = mid
+                if leftBias:
+                    right = mid - 1
+                else:
+                    left = mid + 1
+        return i
