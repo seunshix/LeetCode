@@ -1,21 +1,42 @@
 class Solution:
     def merge(self, intervals: List[List[int]]) -> List[List[int]]:
-
-        intervals.sort(key=lambda x: x[0])
-
-        merged = []
-        for interval in intervals:
-            # if the list of merged intervals is empty or if the current
-            # interval does not overlap with the previous, simply append it.
-            if not merged or merged[-1][1] < interval[0]:
-                merged.append(interval)
+        '''
+        take input list and sort by first value of each interval
+        
+        '''
+        intervals.sort(key = lambda x:x[0])
+        
+        '''
+        create a resulting array with the first interval stored in it
+        '''
+        result = [intervals[0]]
+        
+        '''
+        iterate through every interval excluding the first interval
+        '''
+        for start, end in intervals[1:]:
+            
+            '''
+            from the result array, we get the end value of the most recent intervl in output array, call it prevEnd
+            '''
+            prevEnd = result[-1][1]
+            
+            '''
+            now we compare the start value with prevEnd and check if there is overlap...
+            
+            if there is overlap, we merge the intervals by taking the end value of the previously added interval and set it to the max value of 
+            either it's own end value or the current interval's end value.
+            
+            if non-overlapping, we add the current interval to the result array
+            '''
+            if start <= prevEnd:
+                result[-1][1] = max(prevEnd, end)
+                
             else:
-            # otherwise, there is overlap, so we merge the current and previous
-            # intervals.
-                merged[-1][1] = max(merged[-1][1], interval[1])
+                result.append([start,end])
+            
+        return result
 
-        return merged
-    
 '''
 
 Time complexity : O(nlogn)
@@ -28,3 +49,5 @@ If we can sort intervals in place, we do not need more than constant additional 
 
 
 '''
+                
+            
