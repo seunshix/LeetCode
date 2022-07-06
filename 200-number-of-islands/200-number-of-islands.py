@@ -80,4 +80,20 @@ class Solution:
                     islands+=1                     
             
         return islands
+'''
+Time complexity : O(M×N) where M is the number of rows and NN is the number of columns.
+
+Space complexity : O(min(M,N)) because in worst case where the grid is filled with lands, the size of queue can grow up to min(M,N).
+
+'''        
+
         
+'''
+To do a DFS solution, we change the queue.popleft() to queue.pop() meaning a popright, it will pop the last node that we added instead of the first, meaning it is now a stack implementation
+
+
+Time complexity : O(M×N) where M is the number of rows and N is the number of columns.
+
+Space complexity : worst case O(M×N) in case that the grid map is filled with lands where DFS goes by M×N deep.
+
+'''
