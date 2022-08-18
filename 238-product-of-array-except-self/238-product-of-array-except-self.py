@@ -1,13 +1,20 @@
 class Solution:
     def productExceptSelf(self, nums: List[int]) -> List[int]:
+        
+        '''
+        n = len(nums)
+        print(n)
+        answer = [1] * n
+        
+        '''
+        # O(n) time complexity and space complexity
         n = len(nums) 
         print(n)
-        prefix = [0] * n
-        postfix = [0] * n
-        answer = [0] * n
+        prefix = [1] * n
+        postfix = [1] * n
+        answer = [1] * n
         
-        prefix[0] = 1
-        postfix[n - 1] = 1
+
         print(prefix)
         print(postfix)
         
@@ -24,3 +31,4 @@ class Solution:
         
         print(prefix)
         print(postfix)
+        
