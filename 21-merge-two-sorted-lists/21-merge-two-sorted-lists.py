@@ -4,19 +4,23 @@
 #         self.val = val
 #         self.next = next
 class Solution:
-    def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
-        dummy = ListNode(0)
-        prev = dummy
+    def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:      
+        dummy = tail = ListNode()
         
         while list1 and list2:
+            print("List1", list1)
+            print("List2", list2)
+            print("Dummy", dummy)
+            print("Tail", tail)
+            print()
             if list1.val <= list2.val:
-                prev.next = list1
-                list1 = list1.next
+                tail.next, list1 = list1, list1.next
+            
             else:
-                prev.next = list2
-                list2 = list2.next
-            prev = prev.next
-        prev.next = list1 if list1 is not None else list2
-        
+                tail.next, list2 = list2, list2.next
+                
+            tail = tail.next
+        tail.next = list1 or list2
         return dummy.next
-        
+                
+            
