@@ -4,23 +4,25 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
-class Solution:        
+import collections
+class Solution:
     def isBalanced(self, root: Optional[TreeNode]) -> bool:
+        BalancedStatusWithHeight = collections.namedtuple("BalancedStatusWithHeight", ('balanced', 'height'))
         
-        def height(root): 
-            if root is None:
-                return [True, 0]
+        def check_balanced(root):
+            if not root:
+                return BalancedStatusWithHeight(balanced = True, height = -1)
             
-            leftHeight, rightHeight = height(root.left), height(root.right)
+            left_result, right_result = check_balanced(root.left), check_balanced(root.right)
             
-            balanced = leftHeight[0] and rightHeight[0] and (abs(leftHeight[1] - rightHeight[1]) <=1)
+            if not left_result.balanced:
+                return left_result
+            if not right_result.balanced:
+                return right_result
             
-            return [balanced, 1 + max(leftHeight[1], rightHeight[1])]
-        
-        return height(root)[0]
-        
-        
-        
+            is_balanced = abs(left_result.height - right_result.height) <=1
+            height = 1 + max(left_result.height, right_result.height)
             
-            
+            return BalancedStatusWithHeight(is_balanced, height)
         
+        return check_balanced(root).balanced
