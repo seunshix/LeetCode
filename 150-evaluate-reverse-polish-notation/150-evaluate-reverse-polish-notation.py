@@ -8,10 +8,8 @@ class Solution:
                     '/': lambda y, x: int(x / y)}
         for i in tokens:
             if i in operation:
-                result.append(operation[i](result.pop(), result.pop()))
-                
+                result.append(operation[i](result.pop(), result.pop()))   
             else:
-                result.append(int(i))
-                
+                result.append(int(i))      
         return result.pop()
     
